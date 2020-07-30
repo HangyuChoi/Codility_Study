@@ -1,0 +1,42 @@
+// C#
+using System;
+
+class Solution {
+    public int solution(int N) {
+        int 계산용값 = 0;
+        string 이진문자열 = "";
+        for(int i = 0; i < i+1; i++){
+            if(N > 0) {
+                계산용값 = N % 2;
+                이진문자열 = 계산용값 + 이진문자열;
+                N /= 2;
+            } else {
+                break;
+            }
+        }
+        
+        int[] 이진값배열 = new int[이진문자열.Length];
+        
+        int 첫번째결과 = 0;
+        int 두번째결과 = 0;
+        bool 준비상태 = false;
+        for(int i = 0; i < 이진문자열.Length; i++){
+            if(준비상태){
+                if((int)Char.GetNumericValue(이진문자열[i]) == 0){
+                    첫번째결과 += 1;
+                } else {
+                    준비상태 = false;
+                    if(두번째결과 < 첫번째결과){
+                        두번째결과 = 첫번째결과;
+                    }
+                }
+            } else {
+                이진값배열[i] = (int)Char.GetNumericValue(이진문자열[i]);
+                if(이진값배열[i] != 0){
+                    준비상태 = true;
+                }
+            }
+        }
+        return 두번째결과;
+    }
+}
